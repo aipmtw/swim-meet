@@ -2,6 +2,7 @@
   "name": "swim-meet-live",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://markluce.github.io/swim-meet",
   "dependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "postcss": "^8.5.8",
