@@ -12,6 +12,8 @@ export default function SimulationControls({
   totalEvents,
   speed,
   onSpeedChange,
+  swimmerRange,
+  onSwimmerRangeChange,
 }) {
   const { t, lang } = useLanguage();
 
@@ -97,6 +99,47 @@ export default function SimulationControls({
             <option value={800}>5x (0.8s)</option>
             <option value={300}>10x (0.3s)</option>
           </select>
+        </div>
+      </div>
+
+      {/* Swimmer count range */}
+      <div className="flex items-center gap-3 mt-3 flex-wrap">
+        <label className="text-xs font-medium text-gray-600">
+          {lang === 'zh' ? '每場報名人數區間' : 'Swimmers per event'}:
+        </label>
+        <div className="flex items-center gap-1.5">
+          <span className="text-xs text-gray-500">{lang === 'zh' ? '最少' : 'Min'}</span>
+          <input
+            type="number"
+            min={1}
+            max={swimmerRange.max}
+            value={swimmerRange.min}
+            onChange={(e) => {
+              const val = Math.max(1, Math.min(Number(e.target.value), swimmerRange.max));
+              onSwimmerRangeChange({ ...swimmerRange, min: val });
+            }}
+            disabled={isRunning}
+            className="w-16 text-sm border border-gray-300 rounded px-2 py-1 text-center disabled:opacity-50"
+          />
+          <span className="text-gray-400">—</span>
+          <span className="text-xs text-gray-500">{lang === 'zh' ? '最多' : 'Max'}</span>
+          <input
+            type="number"
+            min={swimmerRange.min}
+            max={60}
+            value={swimmerRange.max}
+            onChange={(e) => {
+              const val = Math.max(swimmerRange.min, Math.min(Number(e.target.value), 60));
+              onSwimmerRangeChange({ ...swimmerRange, max: val });
+            }}
+            disabled={isRunning}
+            className="w-16 text-sm border border-gray-300 rounded px-2 py-1 text-center disabled:opacity-50"
+          />
+          <span className="text-xs text-gray-400 ml-1">
+            {lang === 'zh'
+              ? `(${Math.ceil(swimmerRange.min / 6)}~${Math.ceil(swimmerRange.max / 6)} 組/Round)`
+              : `(${Math.ceil(swimmerRange.min / 6)}~${Math.ceil(swimmerRange.max / 6)} rounds)`}
+          </span>
         </div>
       </div>
 

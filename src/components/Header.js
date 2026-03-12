@@ -18,7 +18,7 @@ export default function Header({ activeTab, onTabChange, lastUpdated }) {
           <div className="flex items-center gap-4 flex-wrap">
             {/* Navigation tabs */}
             <nav className="flex gap-1 bg-gray-100 rounded-lg p-1">
-              {['live', 'results', 'awards'].map((tab) => (
+              {['live', 'results', 'awards', 'lstrslt'].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => onTabChange(tab)}

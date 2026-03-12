@@ -5,12 +5,14 @@ import SimulationControls from './components/SimulationControls';
 import LivePage from './pages/LivePage';
 import ResultsPage from './pages/ResultsPage';
 import AwardsPage from './pages/AwardsPage';
+import LSTRsltViewer from './components/LSTRsltViewer';
 import { allEvents } from './data/events';
 import { buildSimulationData, simulateEventResults } from './data/simulation';
 
 function AppContent() {
   const [activeTab, setActiveTab] = useState('live');
-  const [simData, setSimData] = useState(() => buildSimulationData(allEvents));
+  const [swimmerRange, setSwimmerRange] = useState({ min: 6, max: 12 });
+  const [simData, setSimData] = useState(() => buildSimulationData(allEvents, swimmerRange));
   const [isRunning, setIsRunning] = useState(false);
   const [currentEventIdx, setCurrentEventIdx] = useState(0);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -95,12 +97,17 @@ function AppContent() {
     updateTime();
   }, [currentEventIdx, updateTime]);
 
+  // When swimmer range changes, regenerate data (only if not running)
+  const handleSwimmerRangeChange = useCallback((newRange) => {
+    setSwimmerRange(newRange);
+  }, []);
+
   const handleReset = useCallback(() => {
     handleStop();
-    setSimData(buildSimulationData(allEvents));
+    setSimData(buildSimulationData(allEvents, swimmerRange));
     setCurrentEventIdx(0);
     setLastUpdated(null);
-  }, [handleStop]);
+  }, [handleStop, swimmerRange]);
 
   const currentEventId = currentEventIdx < allEvents.length
     ? allEvents[currentEventIdx].id
@@ -121,6 +128,8 @@ function AppContent() {
           totalEvents={allEvents.length}
           speed={speed}
           onSpeedChange={setSpeed}
+          swimmerRange={swimmerRange}
+          onSwimmerRangeChange={handleSwimmerRangeChange}
         />
 
         {activeTab === 'live' && (
@@ -128,6 +137,7 @@ function AppContent() {
         )}
         {activeTab === 'results' && <ResultsPage simData={simData} />}
         {activeTab === 'awards' && <AwardsPage simData={simData} />}
+        {activeTab === 'lstrslt' && <LSTRsltViewer simData={simData} allEvents={allEvents} />}
       </main>
     </div>
   );

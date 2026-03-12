@@ -33,6 +33,7 @@ const translations = {
     simRunning: 'Simulation running...',
     simStopped: 'Simulation stopped',
     language: 'Language',
+    lstrslt: 'LSTRslt.txt',
   },
   zh: {
     title: 'Swim Meet Live 2025-2026',
@@ -68,6 +69,7 @@ const translations = {
     simRunning: '模擬進行中...',
     simStopped: '模擬已停止',
     language: '語言',
+    lstrslt: 'LSTRslt.txt',
   },
 };
 

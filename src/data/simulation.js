@@ -25,7 +25,8 @@ function pickRandom(arr) {
 }
 
 // Generate swimmers for a given event
-export function generateSwimmers(eventId, eventName) {
+// swimmerRange: { min, max } — user-configurable swimmer count per event
+export function generateSwimmers(eventId, eventName, swimmerRange = { min: 6, max: 12 }) {
   const isGirls = eventName.includes('Girls') || eventName.includes('Mixed');
   const isBoys = eventName.includes('Boys') || eventName.includes('Mixed');
   const is50m = eventName.includes('50M');
@@ -41,8 +42,9 @@ export function generateSwimmers(eventId, eventName) {
 
   const names = isGirls && !isBoys ? girlNames : isBoys && !isGirls ? boyNames : [...girlNames.slice(0, 6), ...boyNames.slice(0, 6)];
 
-  // 6-12 swimmers per event → 1-2 rounds
-  const count = isRelay ? 4 : Math.floor(Math.random() * 7) + 6;
+  const { min, max } = swimmerRange;
+  const range = Math.max(max - min + 1, 1);
+  const count = isRelay ? Math.min(4, min) : Math.floor(Math.random() * range) + min;
   const swimmers = [];
 
   for (let i = 0; i < count; i++) {
@@ -92,10 +94,11 @@ export function generateResult(referTime) {
 }
 
 // Build full simulation data for all events
-export function buildSimulationData(events) {
+// swimmerRange: { min, max } — user-configurable
+export function buildSimulationData(events, swimmerRange = { min: 6, max: 12 }) {
   const data = {};
   events.forEach((ev) => {
-    const swimmers = generateSwimmers(ev.id, ev.name);
+    const swimmers = generateSwimmers(ev.id, ev.name, swimmerRange);
     const rounds = buildRounds(swimmers);
     data[ev.id] = {
       event: ev,
