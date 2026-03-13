@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Header({ activeTab, onTabChange, lastUpdated }) {
-  const { t, lang, toggleLang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -32,14 +32,6 @@ export default function Header({ activeTab, onTabChange, lastUpdated }) {
                 </button>
               ))}
             </nav>
-
-            {/* Language toggle */}
-            <button
-              onClick={toggleLang}
-              className="px-3 py-1.5 text-sm font-medium border border-gray-300 rounded-md hover:bg-gray-50"
-            >
-              {lang === 'en' ? '中文' : 'English'}
-            </button>
 
             {/* Update time */}
             {lastUpdated && (
