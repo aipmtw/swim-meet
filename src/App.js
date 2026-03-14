@@ -5,7 +5,7 @@ import SimulationControls from './components/SimulationControls';
 import LivePage from './pages/LivePage';
 import ResultsPage from './pages/ResultsPage';
 import AwardsPage from './pages/AwardsPage';
-import LSTRsltViewer from './components/LSTRsltViewer';
+import AdminPortal from './pages/AdminPortal';
 import { allEvents } from './data/events';
 import { buildSimulationData, simulateEventResults } from './data/simulation';
 
@@ -143,7 +143,7 @@ function AppContent() {
         )}
         {activeTab === 'results' && <ResultsPage simData={simData} />}
         {activeTab === 'awards' && <AwardsPage simData={simData} />}
-        {activeTab === 'lstrslt' && <LSTRsltViewer simData={simData} allEvents={allEvents} />}
+        {activeTab === 'admin' && <AdminPortal simData={simData} allEvents={allEvents} />}
       </main>
     </div>
   );

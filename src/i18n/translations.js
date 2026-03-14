@@ -1,7 +1,7 @@
 const translations = {
   en: {
-    title: 'Swim Meet Live 2025-2026',
-    subtitle: 'Real-time tracking powered by CIFS Ingestion',
+    title: 'Swim Meet Live 2026',
+    subtitle: '20260425 in KAS Swimming Pool',
     session1: 'Session 1',
     session2: 'Session 2',
     live: 'Live Results',
@@ -9,6 +9,8 @@ const translations = {
     awards: 'Award List',
     admin: 'Admin Portal',
     updated: 'Updated',
+    now: 'Now',
+    adminPortal: 'Admin Portal',
     lane: 'Lane',
     swimmer: 'Swimmer',
     team: 'Team',
@@ -36,8 +38,8 @@ const translations = {
     lstrslt: 'LSTRslt.txt',
   },
   zh: {
-    title: 'Swim Meet Live 2025-2026',
-    subtitle: '即時成績追蹤系統（CIFS 資料擷取）',
+    title: 'Swim Meet Live 2026',
+    subtitle: '20260425 in KAS Swimming Pool',
     session1: '上午場 Session 1',
     session2: '下午場 Session 2',
     live: '即時成績',
@@ -45,6 +47,8 @@ const translations = {
     awards: '獎項列表',
     admin: '管理後台',
     updated: '更新時間',
+    now: '現在時間',
+    adminPortal: '管理後台',
     lane: '水道',
     swimmer: '選手',
     team: '隊伍',
