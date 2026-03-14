@@ -115,6 +115,12 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <div className="bg-blue-600 text-white text-center py-2 px-4 text-sm">
+        已遷移至{' '}
+        <a href="https://aipm.com.tw/swim-meet/" className="underline font-semibold hover:text-blue-200">
+          https://aipm.com.tw/swim-meet/
+        </a>
+      </div>
       <Header activeTab={activeTab} onTabChange={setActiveTab} lastUpdated={lastUpdated} />
       <main className="max-w-7xl mx-auto px-4 py-6">
         <SimulationControls
