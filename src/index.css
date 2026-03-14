@@ -9,3 +9,85 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: #f5f5f5;
 }
+
+/* Print styles for Session 1, Session 2, Final Results and Award List pages */
+@media print {
+  /* Hide navigation, controls, and non-essential UI */
+  header,
+  nav,
+  .bg-blue-600,
+  button,
+  [class*="SimulationControls"],
+  .flex.gap-2.mb-6,
+  .flex.gap-1.bg-gray-100 {
+    display: none !important;
+  }
+
+  /* Reset background for clean printing */
+  body,
+  .min-h-screen,
+  .bg-gray-50 {
+    background-color: white !important;
+    background: white !important;
+  }
+
+  /* Remove shadows and adjust borders for print */
+  .shadow-sm,
+  .shadow {
+    box-shadow: none !important;
+  }
+
+  /* Clean table formatting */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    border: 1px solid #ccc !important;
+    padding: 4px 8px !important;
+  }
+
+  thead {
+    background-color: #f0f0f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Ensure highlight rows print correctly */
+  .bg-yellow-50 {
+    background-color: #fefce8 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page breaks between event sections */
+  .mb-6,
+  .mb-8 {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Section titles start on new page when needed */
+  h2 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Remove rounded corners for print */
+  .rounded-lg,
+  .rounded-md {
+    border-radius: 0 !important;
+  }
+
+  /* Ensure full width */
+  .max-w-7xl {
+    max-width: 100% !important;
+  }
+
+  /* Remove padding from main container */
+  main {
+    padding: 0 !important;
+  }
+}
