@@ -29,13 +29,17 @@ function pickRandom(arr) {
 export function generateSwimmers(eventId, eventName, swimmerRange = { min: 6, max: 12 }) {
   const isGirls = eventName.includes('Girls') || eventName.includes('Mixed');
   const isBoys = eventName.includes('Boys') || eventName.includes('Mixed');
-  const is50m = eventName.includes('50M');
+  const is50m = eventName.includes('50M') || eventName.includes('50m');
+  const is100m = eventName.includes('100M') || eventName.includes('100m');
+  const is200m = eventName.includes('200M') || eventName.includes('200m');
   const isIM100 = eventName.includes('IM 100M');
   const isIM200 = eventName.includes('IM 200M');
-  const isRelay = eventName.includes('Relay');
+  const isRelay = eventName.toLowerCase().includes('relay');
 
   let baseTime = 25;
   if (is50m) baseTime = 38;
+  if (is100m) baseTime = 75;
+  if (is200m) baseTime = 150;
   if (isIM100) baseTime = 75;
   if (isIM200) baseTime = 150;
   if (isRelay) baseTime = 30;
