@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import LSTRsltViewer from '../components/LSTRsltViewer';
 import CsvImporter from '../components/CsvImporter';
@@ -25,22 +25,35 @@ const HEADERS = {
 export default function AdminPortal({ simData, allEvents }) {
   const { lang } = useLanguage();
   const [activeSection, setActiveSection] = useState('school');
-  const [importedData, setImportedData] = useState({
-    schools: [],
-    individualEvents: [],
-    relayEvents: [],
-    individualReg: [],
-    relayReg: [],
-    events: [],
+  const [importedData, setImportedData] = useState(() => {
+    try {
+      const saved = localStorage.getItem('swimMeetAdminData');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return {
+      schools: [],
+      individualEvents: [],
+      relayEvents: [],
+      individualReg: [],
+      relayReg: [],
+      events: [],
+    };
   });
 
-  const handleImport = (key, rows) => {
-    setImportedData((prev) => ({ ...prev, [key]: [...prev[key], ...rows] }));
-  };
+  // Persist to localStorage whenever data changes
+  useEffect(() => {
+    try {
+      localStorage.setItem('swimMeetAdminData', JSON.stringify(importedData));
+    } catch (e) {}
+  }, [importedData]);
 
-  const handleUpdate = (key, rows) => {
+  const handleImport = useCallback((key, rows) => {
+    setImportedData((prev) => ({ ...prev, [key]: [...prev[key], ...rows] }));
+  }, []);
+
+  const handleUpdate = useCallback((key, rows) => {
     setImportedData((prev) => ({ ...prev, [key]: rows }));
-  };
+  }, []);
 
   const basePath = process.env.PUBLIC_URL || '';
 
